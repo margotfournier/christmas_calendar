@@ -4,7 +4,7 @@ import Snowfall from './components/Snowfall';
 import ScratchReveal from './components/ScratchReveal';
 import SleepingAnimal from './components/SleepingAnimal';
 import { DayData } from './types';
-import { CALENDAR_DAYS, WEEKDAYS, TARGET_YEAR, TARGET_MONTH, isWeekendOrHoliday } from './constants';
+import { CALENDAR_DAYS, WEEKDAYS, isWeekendOrHoliday } from './constants';
 
 // Resolve public assets explicitly so Vite serves them correctly
 const HOME_LOGO = new URL('/logos/HomeExchange_logo.png', import.meta.url).href;
@@ -16,6 +16,10 @@ const App: React.FC = () => {
   const [todayDate] = useState(16);
   const [today] = useState(new Date(2026, 0, todayDate));
 
+  // target year/month — defaults (will be overridden by days.yml if present)
+  const [targetYear, setTargetYear] = useState<number>(2026);
+  const [targetMonth, setTargetMonth] = useState<number>(0);
+
   const isAvailable = (dayNum: number) => {
     return dayNum <= todayDate;
   };
@@ -24,11 +28,12 @@ const App: React.FC = () => {
     setDays(prev => prev.map(d => d.day === dayNum ? { ...d, isUnlocked: true } : d));
   };
 
-  const firstDayOfMonth = new Date(TARGET_YEAR, TARGET_MONTH, 1);
+  const firstDayOfMonth = new Date(targetYear, targetMonth, 1);
   const startOffset = (firstDayOfMonth.getDay() + 6) % 7; 
 
   // Charger le mapping YAML /days.yml (public) si présent pour remplacer title/url par jour
   useEffect(() => {
+    const IS_DEV = Boolean((import.meta as any).env?.DEV);
     let cancelled = false;
     const parseDaysYAML = (text: string) => {
       // simple YAML-ish parser: extract top-level year/month and list of day items
@@ -65,29 +70,65 @@ const App: React.FC = () => {
       return { year: yamlYear, month: yamlMonth, map };
     };
 
-    fetch('/days.yml').then(res => {
-      if (!res.ok) throw new Error('no yaml');
-      return res.text();
-    }).then(text => {
-      if (cancelled) return;
+    // Try multiple candidate locations for days.yml so the app works under a base path
+    const candidateUrls = () => {
+      const urls: string[] = [];
+      // 1) relative to the current document (best for subpath deploys)
+      urls.push('days.yml');
+      // 2) Vite base (if present at build/runtime)
       try {
-        const parsed = parseDaysYAML(text);
-        // YAML month is 1-based in file; TARGET_MONTH is 0-based
-        if (parsed.year === TARGET_YEAR && (parsed.month === null || parsed.month - 1 === TARGET_MONTH)) {
-          setDays(prev => prev.map(d => ({
-            ...d,
-            title: parsed.map[d.day]?.title || d.title,
-            notionUrl: parsed.map[d.day]?.url || d.notionUrl
-          })));
-        } else {
-          console.debug('days.yml year/month mismatch; not applying mapping');
-        }
+        const base = (import.meta as any).env?.BASE_URL;
+        if (base) urls.push(new URL('days.yml', base).toString());
       } catch (e) {
-        console.debug('days.yml parse failed', e);
+        /* ignore */
       }
-    }).catch(() => {
-      // no days.yml — ignore
-    });
+      // 3) import.meta.url (relative to this module) — helpful in some bundling setups
+      try {
+        urls.push(new URL('days.yml', import.meta.url).toString());
+      } catch (e) {
+        /* ignore */
+      }
+      // 4) absolute root
+      urls.push('/days.yml');
+      return urls;
+    };
+
+    const tryLoad = async () => {
+      for (const u of candidateUrls()) {
+        if (cancelled) return;
+        IS_DEV && console.debug('Attempting to load days.yml from', u);
+        try {
+          const res = await fetch(u);
+          if (!res.ok) {
+            IS_DEV && console.debug('days.yml not found at', u, res.status);
+            continue;
+          }
+          const text = await res.text();
+          if (cancelled) return;
+          try {
+            const parsed = parseDaysYAML(text);
+            if (parsed.year) setTargetYear(parsed.year);
+            if (parsed.month != null) setTargetMonth(parsed.month - 1);
+            setDays(prev => prev.map(d => ({
+              ...d,
+              title: parsed.map[d.day]?.title || d.title,
+              notionUrl: parsed.map[d.day]?.url || d.notionUrl
+            })));
+            IS_DEV && console.debug('Applied days.yml mapping from', u);
+            return; // done
+          } catch (e) {
+            IS_DEV && console.debug('days.yml parse failed for', u, e);
+            continue;
+          }
+        } catch (err) {
+          IS_DEV && console.debug('fetch error for', u, err);
+          continue;
+        }
+      }
+      IS_DEV && console.debug('No days.yml found in any candidate location');
+    };
+
+    tryLoad();
 
     return () => { cancelled = true; };
   }, []);
@@ -125,12 +166,11 @@ const App: React.FC = () => {
             <span className="h-[1px] w-10 bg-slate-200" />
           </div>
           <h1 className="text-6xl md:text-8xl font-bold tracking-tight text-[#1d1d1f] leading-none">
-            January <span className="text-blue-600 font-extralight italic">2026</span>
+          {new Date(targetYear, targetMonth).toLocaleString(undefined, { month: 'long' })} <span className="text-blue-600 font-extralight italic">{targetYear}</span>
           </h1>
           <p className="text-[#86868b] text-xl font-light max-w-2xl mx-auto pt-6 leading-relaxed">
             Un calendrier de l'après pour découvrir les features de Notion AI un peu tous les jours.
             <br />
-            <span className="text-sm font-medium text-slate-400 mt-2 block italic">Prolongez le plaisir des fêtes en explorant de nouvelles fonctionnalités chaque jour.</span>
           </p>
         </div>
       </header>
@@ -152,7 +192,7 @@ const App: React.FC = () => {
 
           {days.map((day) => {
             const available = isAvailable(day.day);
-            const quietMode = isWeekendOrHoliday(TARGET_YEAR, TARGET_MONTH, day.day);
+              const quietMode = isWeekendOrHoliday(targetYear, targetMonth, day.day);
             const isToday = day.day === todayDate;
             
             // Calculer la semaine pour déterminer si c'est la nuit
@@ -187,16 +227,30 @@ const App: React.FC = () => {
                         {day.title}
                       </h4>
                       {/* (no music icon) */}
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          // Ouvrir une URL spécifique au jour de la semaine si nécessaire
-                          window.open(day.notionUrl, '_blank');
-                        }}
-                        className={`w-auto px-4 py-2 ${isNight ? 'bg-white/20 hover:bg-white/30 text-white border border-white/30' : 'bg-[#1d1d1f] hover:bg-black text-white'} text-[9px] font-black uppercase tracking-[0.2em] rounded-lg transition-all active:scale-[0.98] shadow-lg shadow-black/5 mt-1`}
-                      >
-                        Explore
-                      </button>
+                      {(() => {
+                        const current = days.find(d => d.day === day.day);
+                        const url = current?.notionUrl?.trim();
+                        const isDisabled = !url;
+                        return (
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              if (isDisabled) return;
+                              try {
+                                const resolved = new URL(url as string, (import.meta as any).env?.BASE_URL || window.location.href).toString();
+                                window.open(resolved, '_blank');
+                              } catch (err) {
+                                window.open(url as string, '_blank');
+                              }
+                            }}
+                            disabled={isDisabled}
+                            title={isDisabled ? 'No link configured for this day' : `Open ${current?.title}`}
+                            className={`w-auto px-4 py-2 ${isNight ? 'bg-white/20 hover:bg-white/30 text-white border border-white/30' : 'bg-[#1d1d1f] hover:bg-black text-white'} text-[9px] font-black uppercase tracking-[0.2em] rounded-lg transition-all active:scale-[0.98] shadow-lg shadow-black/5 mt-1 ${isDisabled ? 'opacity-50 pointer-events-none cursor-not-allowed' : ''}`}
+                          >
+                            Explore
+                          </button>
+                        );
+                      })()}
                     </div>
                   </ScratchReveal>
                 )}

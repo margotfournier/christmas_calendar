@@ -34,14 +34,14 @@ const NOTION_AI_TIPS = [
   "Wrap up: les outils IA chez HE"
 ];
 
-export const TARGET_YEAR = 2026;
-export const TARGET_MONTH = 0; // January 2026
+// TARGET_YEAR and TARGET_MONTH are now provided via `public/days.yml`.
+// Defaults are handled in `App.tsx` if the YAML is not present.
 
 export const CALENDAR_DAYS: DayData[] = Array.from({ length: 31 }, (_, i) => ({
   day: i + 1,
-  title: NOTION_AI_TIPS[i] || "Notion AI Magic",
+  title: NOTION_AI_TIPS[i] || "Notion AI Tip",
   description: "Advanced AI techniques for the modern HomeExchanger.",
-  notionUrl: "https://www.notion.so/product/ai",
+  notionUrl: "",
   isUnlocked: false,
   type: 'tip'
 }));

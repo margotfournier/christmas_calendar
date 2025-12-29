@@ -140,7 +140,7 @@ const ScratchReveal: React.FC<ScratchRevealProps> = ({ onReveal, isUnlocked, isO
       }, 1200);
     } catch (e) {
       // ignore audio errors
-      console.debug('audio not available');
+      if ((import.meta as any).env?.DEV) console.debug('audio not available');
     }
   };
 
@@ -591,10 +591,47 @@ const ScratchReveal: React.FC<ScratchRevealProps> = ({ onReveal, isUnlocked, isO
           </>
         )}
 
-        {/* Couche de fond pour les jours non disponibles */}
+        {/* Couche de fond pour les jours non disponibles - effet givre bleu/blanc */}
         {!isUnlocked && (
-          <div className="absolute inset-0 z-10 bg-gradient-to-br from-slate-100/40 to-slate-200/40 flex items-center justify-center">
-            <div className="w-2 h-2 rounded-full bg-slate-300/30" />
+          <div className="absolute inset-0 z-10 flex items-center justify-center rounded-[2rem] overflow-hidden pointer-events-none"
+            style={{
+              background: 'linear-gradient(135deg, rgba(200,230,255,0.6), rgba(255,255,255,0.95))',
+              border: '1px solid rgba(180,210,255,0.6)'
+            }}
+          >
+            {/* Blobs givrés floutés */}
+            <div className="absolute inset-0" style={{
+              background: 'radial-gradient(circle at 20% 30%, rgba(255,255,255,0.75) 0%, rgba(255,255,255,0) 30%), radial-gradient(circle at 80% 70%, rgba(240,250,255,0.6) 0%, rgba(255,255,255,0) 25%)',
+              filter: 'blur(8px)'
+            }} />
+
+            {/* Subtile pattern de cristaux (SVG) */}
+            <svg className="absolute inset-0 w-full h-full" viewBox="0 0 200 200" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" style={{ opacity: 0.28 }}>
+              <defs>
+                <radialGradient id="g1" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stopColor="#fff" stopOpacity="0.9" />
+                  <stop offset="100%" stopColor="#bfe1ff" stopOpacity="0" />
+                </radialGradient>
+              </defs>
+              <g fill="url(#g1)">
+                <circle cx="30" cy="40" r="6" />
+                <circle cx="70" cy="30" r="4" />
+                <circle cx="140" cy="50" r="5" />
+                <circle cx="110" cy="80" r="3" />
+                <circle cx="40" cy="120" r="5" />
+                <circle cx="160" cy="140" r="6" />
+              </g>
+            </svg>
+
+            {/* Centre: petite icône / label verrouillé */}
+            <div className="relative z-10 flex flex-col items-center gap-1">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6 10V8a6 6 0 1112 0v2" stroke="#0369A1" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
+                <rect x="4" y="10" width="16" height="10" rx="2" stroke="#0369A1" strokeWidth="1.4" />
+                <circle cx="12" cy="15" r="1.2" fill="#0369A1" />
+              </svg>
+              <span className="text-xs font-semibold text-sky-700/90">Too soon</span>
+            </div>
           </div>
         )}
 

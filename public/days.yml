@@ -2,7 +2,7 @@ year: 2026
 month: 1
 days:
   - id: 2
-    title: "Lancement : principes de base et rassurer sur la sécurité"
+    title: "Notion AI is available !"
     url: "https://www.notion.so/hymaia/Lancement-principes-de-base-et-rassurer-sur-la-s-curit-2d53b2bde8ad80e2a630e9d52e307f30?v=bccdda624c3f425b902c539daa951826&source=copy_link"
   - id: 5
     title: "Enterprise search"
@@ -14,19 +14,19 @@ days:
     title: "AI Meeting notes"
     url: "https://www.notion.so/product/ai"
   - id: 8
-    title: "Exemple - Research mode sur une feature produit"
+    title: "Example !"
     url: "https://www.notion.so/product/ai"
   - id: 9
-    title: "Ask AI dans un paragraphe"
+    title: "Ask AI"
     url: "https://www.notion.so/product/ai"
   - id: 12
-    title: "Notion agent"
+    title: "Notion Agent"
     url: "https://www.notion.so/product/ai"
   - id: 13
     title: "Bloc d’IA"
     url: "https://www.notion.so/product/ai"
   - id: 14
-    title: "Research mode example - PRD"
+    title: "Example"
     url: "https://www.notion.so/product/ai"
   - id: 15
     title: "Databases: Create & Query"
