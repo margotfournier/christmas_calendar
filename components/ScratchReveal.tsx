@@ -5,10 +5,37 @@ interface ScratchRevealProps {
   isUnlocked: boolean; // Si la case est disponible (date passée ou présente)
   isOpened: boolean;   // Si l'utilisateur a déjà cliqué pour l'ouvrir
   isToday: boolean;    // Si c'est la case spécifique du jour
+  day: number;         // Numéro du jour pour déterminer la couleur de ciel
+  startOffset: number; // Offset du calendrier pour calculer la ligne
   children: React.ReactNode;
 }
 
-const ScratchReveal: React.FC<ScratchRevealProps> = ({ onReveal, isUnlocked, isOpened, isToday, children }) => {
+const ScratchReveal: React.FC<ScratchRevealProps> = ({ onReveal, isUnlocked, isOpened, isToday, day, startOffset, children }) => {
+  // Calculer la ligne du calendrier (0-indexed) pour que toutes les cases d'une même ligne aient la même couleur
+  const calendarRow = Math.floor((startOffset + day - 1) / 7);
+  // Convertir la ligne en semaine (1-indexed) pour correspondre à la logique de WinterIllustration
+  const week = calendarRow + 1;
+  
+  const getSkyGradient = () => {
+    if (week === 1 || week === 5) {
+      // Nuit
+      return 'linear-gradient(to bottom, #1a1c2c, #3b5e8c)';
+    } else if (week === 2) {
+      // Aube
+      return 'linear-gradient(to bottom, #ff9a9e, #fecfef)';
+    } else if (week === 3) {
+      // Midi
+      return 'linear-gradient(to bottom, #4a90e2, #87ceeb)';
+    } else if (week === 4) {
+      // Coucher de soleil
+      return 'linear-gradient(to bottom, #a1c4fd 0%, #dcd6f7 20%, #ffb7b7 45%, #ffcc33 75%, #f48fb1 100%)';
+    } else {
+      // Jour
+      return 'linear-gradient(to bottom, #a1c4fd, #c2e9fb)';
+    }
+  };
+  
+  const skyGradient = getSkyGradient();
   const [localOpened, setLocalOpened] = useState(isOpened);
   const [isScratching, setIsScratching] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -37,24 +64,18 @@ const ScratchReveal: React.FC<ScratchRevealProps> = ({ onReveal, isUnlocked, isO
     canvas.style.height = `${rect.height}px`;
     ctx.scale(dpr, dpr);
 
-    // Remplir avec la couche de grattage (argenté/métallique)
-    ctx.fillStyle = '#c0c0c0';
+    // Couche de grattage subtile (blanc/givre) sur fond de ciel coloré
+    // Couche blanche semi-transparente pour créer l'effet de grattage
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.75)';
     ctx.fillRect(0, 0, rect.width, rect.height);
 
-    // Ajouter un motif texturé pour l'effet ticket à gratter
-    const gradient = ctx.createLinearGradient(0, 0, rect.width, rect.height);
-    gradient.addColorStop(0, 'rgba(255, 255, 255, 0.4)');
-    gradient.addColorStop(0.5, 'rgba(200, 200, 200, 0.3)');
-    gradient.addColorStop(1, 'rgba(150, 150, 150, 0.4)');
-    ctx.fillStyle = gradient;
+    // Ajouter une texture subtile de givre
+    const frostGradient = ctx.createLinearGradient(0, 0, rect.width, rect.height);
+    frostGradient.addColorStop(0, 'rgba(255, 255, 255, 0.4)');
+    frostGradient.addColorStop(0.5, 'rgba(240, 240, 240, 0.3)');
+    frostGradient.addColorStop(1, 'rgba(255, 255, 255, 0.4)');
+    ctx.fillStyle = frostGradient;
     ctx.fillRect(0, 0, rect.width, rect.height);
-
-    // Ajouter du texte "Grattez ici" en petit
-    ctx.fillStyle = 'rgba(100, 100, 100, 0.4)';
-    ctx.font = 'bold 10px Arial';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.fillText('Grattez ici', rect.width / 2, rect.height / 2);
 
     isInitializedRef.current = true;
   };
@@ -211,9 +232,9 @@ const ScratchReveal: React.FC<ScratchRevealProps> = ({ onReveal, isUnlocked, isO
       <div 
         ref={containerRef}
         className={`relative w-full aspect-square rounded-[2rem] overflow-hidden transition-all duration-500 
-          ${isUnlocked && !localOpened ? 'cursor-grab active:cursor-grabbing' : 'cursor-default'}
-          ${localOpened ? 'bg-white/40 shadow-inner' : 'glass'}
+          ${isUnlocked ? 'cursor-grab active:cursor-grabbing border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.02)] hover:shadow-[0_12px_32px_rgba(0,0,0,0.04)]' : 'cursor-default'}
         `}
+        style={isUnlocked ? { background: skyGradient } : {}}
       >
         {/* Contenu Révélé */}
         <div className={`absolute inset-0 flex items-center justify-center p-4 transition-all duration-700 z-0

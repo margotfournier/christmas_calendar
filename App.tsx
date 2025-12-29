@@ -109,6 +109,8 @@ const App: React.FC = () => {
                     isUnlocked={available}
                     isOpened={day.isUnlocked}
                     isToday={isToday}
+                    day={day.day}
+                    startOffset={startOffset}
                   >
                     <div className="flex flex-col items-center text-center w-full">
                       <div className="w-10 h-10 mb-3 bg-slate-50 rounded-2xl flex items-center justify-center group-hover:bg-blue-50 transition-colors shadow-inner">
