@@ -5,100 +5,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>HomeExchange x Notion AI | Calendar</title>
-    <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-      :root {
-        --he-blue: #004F9F;
-        --he-yellow: #FFD100;
-      }
-      body {
-        font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-        background-color: #ffffff;
-        color: #1d1d1f;
-        overflow-x: hidden;
-        -webkit-font-smoothing: antialiased;
-      }
-      .glass {
-        background: rgba(255, 255, 255, 0.6);
-        backdrop-filter: blur(30px) saturate(210%);
-        -webkit-backdrop-filter: blur(30px) saturate(210%);
-        border: 1px solid rgba(255, 255, 255, 0.4);
-        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.04);
-      }
-      .calendar-grid {
-        display: grid;
-        grid-template-columns: repeat(7, 1fr);
-        gap: 1.5rem;
-      }
-      @media (max-width: 1024px) {
-        .calendar-grid {
-          grid-template-columns: repeat(4, 1fr);
-        }
-      }
-      @media (max-width: 640px) {
-        .calendar-grid {
-          grid-template-columns: repeat(2, 1fr);
-        }
-      }
-      @keyframes float {
-        0%, 100% { transform: translateY(0px); }
-        50% { transform: translateY(-10px); }
-      }
-      .animate-float {
-        animation: float 6s ease-in-out infinite;
-      }
-      @keyframes pulse-border {
-        0%, 100% { border-color: rgba(255, 255, 255, 0.4); }
-        50% { border-color: rgba(255, 255, 255, 0.7); }
-      }
-      @keyframes shimmer {
-        0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); opacity: 0; }
-        50% { opacity: 0.5; }
-        100% { transform: translateX(200%) translateY(200%) rotate(45deg); opacity: 0; }
-      }
-      @keyframes apple-reveal {
-        0% { 
-          transform: scale(0.88) translateY(8px); 
-          opacity: 0; 
-          filter: blur(12px) brightness(0.9);
-        }
-        25% {
-          transform: scale(1.02) translateY(-3px);
-          opacity: 0.7;
-          filter: blur(4px) brightness(1.1);
-        }
-        50% { 
-          transform: scale(1.04) translateY(-6px); 
-          opacity: 0.95; 
-          filter: blur(1px) brightness(1.15);
-        }
-        70% {
-          transform: scale(0.99) translateY(1px);
-          opacity: 1;
-          filter: blur(0px) brightness(1.05);
-        }
-        85% {
-          transform: scale(1.01) translateY(-1px);
-          opacity: 1;
-          filter: blur(0px) brightness(1.02);
-        }
-        100% { 
-          transform: scale(1) translateY(0px); 
-          opacity: 1; 
-          filter: blur(0px) brightness(1);
-        }
-      }
-      .aurora-bg {
-        background: radial-gradient(circle at 0% 0%, #f0f9ff 0%, transparent 50%),
-                    radial-gradient(circle at 100% 100%, #eff6ff 0%, transparent 50%),
-                    #ffffff;
-      }
-    </style>
 
-    <!-- Favicon: use Vite's /christmas_calendar/ so the built site (with base '/christmas_calendar/') points to the right location -->
-    <link rel="icon" type="image/svg+xml" href="/christmas_calendar/favicon.svg" />
-    <link rel="alternate icon" href="/christmas_calendar/favicon.ico" />
+    <link rel="icon" type="image/svg+xml" href="/ai_calendar/favicon.svg" />
+    <link rel="alternate icon" href="/ai_calendar/favicon.ico" />
     <script type="importmap">
     {
       "imports": {
@@ -108,7 +18,8 @@
       }
     }
     </script>
-    <script type="module" crossorigin src="/christmas_calendar/assets/index-_mlHhu5_.js"></script>
+    <script type="module" crossorigin src="/ai_calendar/assets/index-DbwplKav.js"></script>
+    <link rel="stylesheet" crossorigin href="/ai_calendar/assets/index-B6izzEFm.css">
   </head>
   <body class="aurora-bg">
     <div id="root"></div>
