@@ -1,4 +1,6 @@
 name: Deploy dist to gh-pages
+permissions:
+  contents: write
 
 on:
   push:
