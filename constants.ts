@@ -50,9 +50,14 @@ export const WEEKDAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 // Les métadonnées musicales et les URLs par weekday ont été retirées.
 // Utilisez `public/days.yml` pour mapper chaque jour (id) -> { title, url }.
 
+export const HOLIDAYS: { month: number; day: number; label?: string }[] = [
+  { month: 0, day: 1, label: "New Year's Day" },
+  { month: 11, day: 25, label: "Christmas Day" }
+];
+
 export const isWeekendOrHoliday = (year: number, month: number, day: number) => {
-  // Le 1er Janvier est un jour férié
-  if (day === 1 && month === 0) return true;
+  const isHoliday = HOLIDAYS.some(holiday => holiday.month === month && holiday.day === day);
+  if (isHoliday) return true;
   
   const date = new Date(year, month, day);
   const dayOfWeek = date.getDay(); 
