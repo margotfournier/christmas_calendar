@@ -12,16 +12,16 @@ const NOTION_LOGO = new URL('/logos/Notion-logo.svg.png', import.meta.url).href;
 
 const App: React.FC = () => {
   const [days, setDays] = useState<DayData[]>(CALENDAR_DAYS);
-  // Simulation de la date au 16 Janvier 2026
-  const [todayDate] = useState(16);
-  const [today] = useState(new Date(2026, 0, todayDate));
 
   // target year/month — defaults (will be overridden by days.yml if present)
   const [targetYear, setTargetYear] = useState<number>(2026);
   const [targetMonth, setTargetMonth] = useState<number>(0);
 
+  const actualToday = new Date();
+  const isCurrentTargetMonth = actualToday.getFullYear() === targetYear && actualToday.getMonth() === targetMonth;
+  const availableDayLimit = isCurrentTargetMonth ? actualToday.getDate() : 0;
   const isAvailable = (dayNum: number) => {
-    return dayNum <= todayDate;
+    return isCurrentTargetMonth && dayNum <= availableDayLimit;
   };
 
   const handleReveal = (dayNum: number) => {
@@ -192,8 +192,8 @@ const App: React.FC = () => {
 
           {days.map((day) => {
             const available = isAvailable(day.day);
-              const quietMode = isWeekendOrHoliday(targetYear, targetMonth, day.day);
-            const isToday = day.day === todayDate;
+            const quietMode = isWeekendOrHoliday(targetYear, targetMonth, day.day);
+            const isToday = isCurrentTargetMonth && day.day === actualToday.getDate();
             
             // Calculer la semaine pour déterminer si c'est la nuit
             const calendarRow = Math.floor((startOffset + day.day - 1) / 7);
