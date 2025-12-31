@@ -10,27 +10,27 @@ export const COLORS = {
   TEXT_SECONDARY: '#86868b'
 };
 
-const NOTION_AI_TIPS = [
+const CHAT_GPT_FEATURES_TIPS = [
   "Launch: basics and security reassurance",
   "Enterprise search",
   "Research mode",
   "AI meeting notes",
   "Example - Research mode on a product feature",
   "Ask AI in a paragraph",
-  "Notion Agent",
+  "Chat GPT features Agent",
   "AI block",
   "Research mode example - PRD",
   "Databases: Create & Query",
   "Databases: Update & practical tips",
-  "Customize your Notion Agent",
+  "Customize your Chat GPT features Agent",
   "How to choose the right model?",
-  "Notion Agent UC 1: organize pages",
-  "Notion Agent Personalization 1",
-  "Notion AI keyboard shortcut",
-  "Notion Agent UC 2: generate product epics",
+  "Chat GPT features Agent UC 1: organize pages",
+  "Chat GPT features Agent Personalization 1",
+  "Chat GPT features AI keyboard shortcut",
+  "Chat GPT features Agent UC 2: generate product epics",
   "Document reading (connectors, PDF, images)",
   "Translate a page",
-  "Notion Agent Personalization 2",
+  "Chat GPT features Agent Personalization 2",
   "Wrap up: AI tools at HE"
 ];
 
@@ -39,8 +39,8 @@ const NOTION_AI_TIPS = [
 
 export const CALENDAR_DAYS: DayData[] = Array.from({ length: 31 }, (_, i) => ({
   day: i + 1,
-  title: NOTION_AI_TIPS[i] || "Notion AI Tip",
-  description: "Advanced AI techniques for the modern HomeExchanger.",
+  title: CHAT_GPT_FEATURES_TIPS[i] || "Chat GPT features Tip",
+  description: "Advanced AI techniques for the modern LeBonCoiner.",
   notionUrl: "",
   isUnlocked: false,
   type: 'tip'

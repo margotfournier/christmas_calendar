@@ -2,65 +2,65 @@ year: 2025
 month: 12
 days:
   - id: 2
-    title: "Notion AI is available!"
-    url: "https://www.notion.so/hymaia/Lancement-principes-de-base-et-rassurer-sur-la-s-curit-2d53b2bde8ad80e2a630e9d52e307f30?v=bccdda624c3f425b902c539daa951826&source=copy_link"
+    title: "Lancement : Principes de base et sécurité des données"
+    url: "https://openai.com/security/"
   - id: 5
-    title: "Enterprise search"
-    url: "https://www.notion.so/Enterprise-search-7bae8b91190a4f9a91ea9c6d5883244e?v=da5c7033c4694da4a83b9d39c46ffa0d&source=copy_link"
+    title: "SearchGPT : La recherche web en temps réel"
+    url: "https://openai.com/index/introducing-chatgpt-search/"
   - id: 6
-    title: "Research mode"
-    url: "https://www.notion.so/product/ai"
+    title: "Deep Research : Analyses approfondies"
+    url: "https://openai.com/index/introducing-deep-research/"
   - id: 7
-    title: "AI Meeting notes"
-    url: "https://www.notion.so/product/ai"
+    title: "Advanced Voice Mode : Interactions naturelles"
+    url: "https://openai.com/index/advanced-voice-mode-rolling-out/"
   - id: 8
-    title: "Example - Research mode on a product feature"
-    url: "https://www.notion.so/product/ai"
+    title: "Exemples d'utilisation du Deep Research"
+    url: "https://openai.com/news/"
   - id: 9
-    title: "Ask AI"
-    url: "https://www.notion.so/product/ai"
+    title: "Le modèle de raisonnement o1 (OpenAI o1)"
+    url: "https://openai.com/index/introducing-openai-o1-preview/"
   - id: 12
-    title: "Notion Agent"
-    url: "https://www.notion.so/product/ai"
+    title: "Explorer le GPT Store"
+    url: "https://chatgpt.com/gpts"
   - id: 13
-    title: "AI block"
-    url: "https://www.notion.so/product/ai"
+    title: "Introduction à Canvas"
+    url: "https://openai.com/index/introducing-canvas/"
   - id: 14
-    title: "Research mode example - PRD"
-    url: "https://www.notion.so/product/ai"
+    title: "Utiliser Canvas pour l'écriture de documents"
+    url: "https://openai.com/index/introducing-canvas/"
   - id: 15
-    title: "Databases: Create & Query"
-    url: "https://www.notion.so/product/ai"
+    title: "ChatGPT Projects : Guide de démarrage"
+    url: "https://help.openai.com/en/articles/10169521-using-projects-in-chatgpt"
   - id: 16
-    title: "Databases: Update & practical tips"
-    url: "https://www.notion.so/product/ai"
+    title: "Gérer la base de connaissances des Projets"
+    url: "https://help.openai.com/en/articles/10169521-using-projects-in-chatgpt"
   - id: 19
-    title: "Customize your Notion Agent"
-    url: "https://www.notion.so/product/ai"
+    title: "Configurer les Custom Instructions"
+    url: "https://help.openai.com/en/articles/8083517-custom-instructions-for-chatgpt"
   - id: 20
-    title: "How to choose the right model?"
-    url: "https://www.notion.so/product/ai"
+    title: "Comparatif des forfaits et modèles"
+    url: "https://openai.com/chatgpt/pricing/"
   - id: 21
-    title: "Notion Agent UC 1: organize pages"
-    url: "https://www.notion.so/product/ai"
+    title: "Découvrir des GPTs productivité"
+    url: "https://chatgpt.com/gpts"
   - id: 22
-    title: "Notion Agent Personalization 1"
-    url: "https://www.notion.so/product/ai"
+    title: "Guide officiel du Prompt Engineering"
+    url: "https://platform.openai.com/docs/guides/prompt-engineering"
   - id: 23
-    title: "Notion AI keyboard shortcut"
-    url: "https://www.notion.so/product/ai"
+    title: "ChatGPT pour Desktop (Mac & Windows)"
+    url: "https://openai.com/chatgpt/desktop/"
   - id: 26
-    title: "Notion Agent UC 2: generate product epics"
-    url: "https://www.notion.so/product/ai"
+    title: "Utiliser les Projets pour le Product Management"
+    url: "https://help.openai.com/en/articles/10169521-using-projects-in-chatgpt"
   - id: 27
-    title: "Document reading (connectors, PDF, images)"
-    url: "https://www.notion.so/product/ai"
+    title: "Connecteurs Google Drive et OneDrive"
+    url: "https://help.openai.com/en/articles/9239633-google-drive-and-microsoft-onedrive-connectors-on-chatgpt"
   - id: 28
-    title: "Translate a page"
-    url: "https://www.notion.so/product/ai"
+    title: "Analyse de données et vision (GPT-4o)"
+    url: "https://openai.com/index/gpt-4o-and-more-tools-to-chatgpt-free/"
   - id: 29
-    title: "Notion Agent Personalization 2"
-    url: "https://www.notion.so/product/ai"
+    title: "Personnalisation et mémoire de ChatGPT"
+    url: "https://help.openai.com/en/articles/8083517-custom-instructions-for-chatgpt"
   - id: 30
-    title: "Wrap up: AI tools at HE"
-    url: "https://www.notion.so/product/ai"
+    title: "Dernières nouveautés OpenAI"
+    url: "https://openai.com/news/"

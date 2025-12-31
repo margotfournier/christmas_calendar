@@ -7,8 +7,8 @@ import { DayData } from './types';
 import { CALENDAR_DAYS, WEEKDAYS, isWeekendOrHoliday } from './constants';
 
 // Resolve public assets explicitly so Vite serves them correctly
-const HOME_LOGO = new URL('/logos/HomeExchange_logo.png', import.meta.url).href;
-const NOTION_LOGO = new URL('/logos/Notion-logo.svg.png', import.meta.url).href;
+const LEBONCOIN_LOGO = new URL('/logos/leboncoin_logo.png', import.meta.url).href;
+const CHAT_GPT_FEATURES_LOGO = new URL('/logos/ChatGPT-Logo.svg.png', import.meta.url).href;
 
 const App: React.FC = () => {
   const [days, setDays] = useState<DayData[]>(CALENDAR_DAYS);
@@ -143,16 +143,16 @@ const App: React.FC = () => {
            <div className="glass p-6 rounded-[3rem] shadow-xl shadow-blue-500/5 flex items-center gap-6">
              <div className="flex items-center">
                <img
-                 src={HOME_LOGO}
-                 alt="HomeExchange"
+                 src={LEBONCOIN_LOGO}
+                 alt="LeBonCoin"
                  className="h-10 w-auto object-contain"
                />
              </div>
              <div className="h-12 w-[1.5px] bg-slate-200/50" />
              <div className="flex items-center">
                 <img
-                  src={NOTION_LOGO}
-                  alt="Notion"
+                  src={CHAT_GPT_FEATURES_LOGO}
+                  alt="Chat GPT features"
                   className="w-10 h-10 object-contain"
                 />
              </div>
@@ -162,14 +162,14 @@ const App: React.FC = () => {
         <div className="space-y-4">
           <div className="flex items-center justify-center gap-3">
             <span className="h-[1px] w-10 bg-slate-200" />
-            <h2 className="text-[12px] uppercase tracking-[0.5em] font-black text-blue-500/70">HomeExchange • After-Calendar</h2>
+            <h2 className="text-[12px] uppercase tracking-[0.5em] font-black text-blue-500/70">LeBonCoin • After-Calendar</h2>
             <span className="h-[1px] w-10 bg-slate-200" />
           </div>
           <h1 className="text-6xl md:text-8xl font-bold tracking-tight text-[#1d1d1f] leading-none">
           {new Date(targetYear, targetMonth).toLocaleString('en-US', { month: 'long' })} <span className="text-blue-600 font-extralight italic">{targetYear}</span>
           </h1>
           <p className="text-[#86868b] text-xl font-light max-w-2xl mx-auto pt-6 leading-relaxed">
-            An after-calendar to discover Notion AI features a little every day.
+            An after-calendar to discover Chat GPT features a little every day.
             <br />
           </p>
         </div>
