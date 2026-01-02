@@ -3,61 +3,61 @@ month: 1
 days:
   - id: 5
     title: "Créer son premier Projet thématique"
-    url: "https://docs.google.com/document/u/0/d/18Fq0Q7JkAtag40wwZW34N0goTzt4ETzWqqcAycPQIMw/edit"
+    url: "https://docs.google.com/document/d/1biQ-ECWnCQYucIwUXgVwd5XInclQ9uTa9kjtJPinWxk/edit?tab=t.0"
   - id: 6
-    title: "Deep Research : Analyses approfondies"
-    url: "https://openai.com/index/introducing-deep-research/"
+    title: "Configurer ses Custom Instructions"
+    url: "https://docs.google.com/document/d/1NSwtgFbJWoMBNxf1CboPO-ngBdZTVD0Cbbn8k63C2YY/edit?tab=t.0"
   - id: 7
-    title: "Advanced Voice Mode : Interactions naturelles"
-    url: "https://openai.com/index/advanced-voice-mode-rolling-out/"
+    title: "Principes de prompting efficace"
+    url: "https://docs.google.com/document/d/1uaaikNjzoUBUkRP69g_nN4MEY0OXkPpZpsCMRJyvafE/edit?tab=t.0"
   - id: 8
-    title: "Exemples d'utilisation du Deep Research"
-    url: "https://openai.com/news/"
+    title: "Connecter Google Drive"
+    url: "https://docs.google.com/document/d/1DMy6aNNupqVsNY-bH4iyIYPxRNNl-9TUOxaTR9LmoAk/edit?tab=t.0"
   - id: 9
-    title: "Le modèle de raisonnement o1 (OpenAI o1)"
-    url: "https://openai.com/index/introducing-openai-o1-preview/"
+    title: "Découvrir et utiliser un GPT du store"
+    url: "https://docs.google.com/document/d/1TuSLxQqzqbBB550rzK2ku4eZumRIsT1W9gJ_lKczVkk/edit?tab=t.0"
   - id: 12
-    title: "Explorer le GPT Store"
-    url: "https://chatgpt.com/gpts"
+    title: "Créer son premier Custom GPT"
+    url: "https://docs.google.com/document/d/1dkvxypYg_tk1VWpxjWSnt7UOx8k6cMv9Q2XXcvT4fjA/edit?tab=t.0"
   - id: 13
-    title: "Introduction à Canvas"
-    url: "https://openai.com/index/introducing-canvas/"
+    title: "Ajouter des fichiers de connaissance à un GPT"
+    url: "https://docs.google.com/document/d/169oMj8_vsfVw2ydzof-yrLoHM6BZUgATH2lnDcejd9o/edit?tab=t.0"
   - id: 14
-    title: "Utiliser Canvas pour l'écriture de documents"
-    url: "https://openai.com/index/introducing-canvas/"
+    title: "Créer un GPT avec instructions métier précises"
+    url: "https://docs.google.com/document/d/1WKSaA4514-KLRTqlZr13714vLlnhfx-s9dzH19MsBG4/edit?tab=t.0"
   - id: 15
-    title: "ChatGPT Projects : Guide de démarrage"
-    url: "https://help.openai.com/en/articles/10169521-using-projects-in-chatgpt"
+    title: "Utiliser le Mode Agent pour les tâches complexes"
+    url: "https://docs.google.com/document/d/1KDoxgmOpy5KcUJVf2LwktFf52qEQZq9JyDrFFUalO6s/edit?tab=t.0"
   - id: 16
-    title: "Gérer la base de connaissances des Projets"
-    url: "https://help.openai.com/en/articles/10169521-using-projects-in-chatgpt"
+    title: "Créer son GPT assistant personnel avec Memory"
+    url: "https://docs.google.com/document/d/1Innin0vn06Cdgp8uXUTvxx7SLetCWdh84nOHmOkvwGU/edit?tab=t.0"
   - id: 19
-    title: "Configurer les Custom Instructions"
-    url: "https://help.openai.com/en/articles/8083517-custom-instructions-for-chatgpt"
+    title: "Utiliser Canvas pour co-écrire un document"
+    url: "https://docs.google.com/document/d/1hcbr6_Njnlphcq2I6lbIDXZKvCedBw1in9INpa2v-Ts/edit?tab=t.0"
   - id: 20
-    title: "Comparatif des forfaits et modèles"
-    url: "https://openai.com/chatgpt/pricing/"
+    title: "Analyser un fichier Google Sheets"
+    url: "https://docs.google.com/document/d/1NS2CbR8m5QMSkBlrJCuQy5ql2nvDp54gG6A72XQjBBc/edit?tab=t.0"
   - id: 21
-    title: "Découvrir des GPTs productivité"
-    url: "https://chatgpt.com/gpts"
+    title: "Analyser des images et screenshots"
+    url: "https://docs.google.com/document/d/1zxFSmaNw3YzReMv5cd0CEG6tEP-LMIJJLp813wmIQwI/edit?tab=t.0"
   - id: 22
-    title: "Guide officiel du Prompt Engineering"
-    url: "https://platform.openai.com/docs/guides/prompt-engineering"
+    title: "Lancer une Deep Research pour analyses approfondies"
+    url: "https://docs.google.com/document/d/1AYp-HXGLPKXgKeHxAUsD_fhq-plP9tdCNspaMU0GLfU/edit?tab=t.0"
   - id: 23
-    title: "ChatGPT pour Desktop (Mac & Windows)"
-    url: "https://openai.com/chatgpt/desktop/"
+    title: "Créer des visualisations à partir de données"
+    url: "https://docs.google.com/document/d/16uNy9MhaP18ewwGWNnYvAayIGJrc5IvW6_NAvWgwcTM/edit?tab=t.0"
   - id: 26
-    title: "Utiliser les Projets pour le Product Management"
-    url: "https://help.openai.com/en/articles/10169521-using-projects-in-chatgpt"
+    title: "Créer un GPT de veille automatisée"
+    url: "https://docs.google.com/document/d/1Lp_eeKBCi__oFJtm8zDJH2-5tNLsxzUfjmbafk7TCYw/edit?tab=t.0"
   - id: 27
-    title: "Connecteurs Google Drive et OneDrive"
-    url: "https://help.openai.com/en/articles/9239633-google-drive-and-microsoft-onedrive-connectors-on-chatgpt"
+    title: "Automatiser ses compte-rendus de réunion"
+    url: "https://docs.google.com/document/d/1s24HuYCb5CBkrW6B_dWRC8Qi5oIO9c_TJsY6Hp3h27I/edit?tab=t.0"
   - id: 28
-    title: "Analyse de données et vision (GPT-4o)"
-    url: "https://openai.com/index/gpt-4o-and-more-tools-to-chatgpt-free/"
+    title: "Créer un GPT template pour ses briefs"
+    url: "https://docs.google.com/document/d/1zA8QdQXiz7Ug4YzwPG3vFQ5omxdIH43WC6V4zffLUjE/edit?tab=t.0"
   - id: 29
-    title: "Personnalisation et mémoire de ChatGPT"
-    url: "https://help.openai.com/en/articles/8083517-custom-instructions-for-chatgpt"
+    title: "Analyser du feedback clients en masse"
+    url: "https://docs.google.com/document/d/11ENxZwG-g7OkVXqWB2H8ktxbED_idiFFvoo6HibS9Bo/edit?tab=t.0"
   - id: 30
-    title: "Dernières nouveautés OpenAI"
-    url: "https://openai.com/news/"
+    title: "Utiliser Canvas pour le code et debug"
+    url: "https://docs.google.com/document/d/1SuG1tifscE_Wx0bZQevrmkKH6Djd6iePI4JJ57WQwGg/edit?tab=t.0"
