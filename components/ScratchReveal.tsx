@@ -4,13 +4,14 @@ interface ScratchRevealProps {
   onReveal: () => void;
   isUnlocked: boolean; // Si la case est disponible (date passée ou présente)
   isOpened: boolean;   // Si l'utilisateur a déjà cliqué pour l'ouvrir
+  isScratchable: boolean; // Si cette case doit proposer l'effet grattable
   isToday: boolean;    // Si c'est la case spécifique du jour
   day: number;         // Numéro du jour pour déterminer la couleur de ciel
   startOffset: number; // Offset du calendrier pour calculer la ligne
   children: React.ReactNode;
 }
 
-const ScratchReveal: React.FC<ScratchRevealProps> = ({ onReveal, isUnlocked, isOpened, isToday, day, startOffset, children }) => {
+const ScratchReveal: React.FC<ScratchRevealProps> = ({ onReveal, isUnlocked, isOpened, isScratchable, isToday, day, startOffset, children }) => {
   // Calculer la ligne du calendrier (0-indexed) pour que toutes les cases d'une même ligne aient la même couleur
   const calendarRow = Math.floor((startOffset + day - 1) / 7);
   // Convertir la ligne en semaine (1-indexed) pour correspondre à la logique de WinterIllustration
@@ -43,6 +44,11 @@ const ScratchReveal: React.FC<ScratchRevealProps> = ({ onReveal, isUnlocked, isO
   const containerRef = useRef<HTMLDivElement>(null);
   const isScratchingRef = useRef(false);
   const isInitializedRef = useRef(false);
+  const isInteractive = isUnlocked && !localOpened && isScratchable;
+
+  useEffect(() => {
+    setLocalOpened(isOpened);
+  }, [isOpened]);
 
   // Seuil de révélation (60% de la surface grattée - nécessite plus de grattage)
   const REVEAL_THRESHOLD = 80;
@@ -214,7 +220,7 @@ const ScratchReveal: React.FC<ScratchRevealProps> = ({ onReveal, isUnlocked, isO
   };
 
   useEffect(() => {
-    if (localOpened || !isUnlocked) {
+    if (!isInteractive) {
       isInitializedRef.current = false;
       return;
     }
@@ -244,7 +250,7 @@ const ScratchReveal: React.FC<ScratchRevealProps> = ({ onReveal, isUnlocked, isO
     };
 
     const handleStart = (e: MouseEvent | TouchEvent) => {
-      if (!isUnlocked || localOpened) return;
+      if (!isInteractive) return;
       e.preventDefault();
       e.stopPropagation();
       isScratchingRef.current = true;
@@ -256,7 +262,7 @@ const ScratchReveal: React.FC<ScratchRevealProps> = ({ onReveal, isUnlocked, isO
     };
 
     const handleMove = (e: MouseEvent | TouchEvent) => {
-      if (!isScratchingRef.current || !isUnlocked || localOpened) return;
+      if (!isScratchingRef.current || !isInteractive) return;
       e.preventDefault();
       e.stopPropagation();
       const pos = getEventPos(e);
@@ -288,7 +294,7 @@ const ScratchReveal: React.FC<ScratchRevealProps> = ({ onReveal, isUnlocked, isO
       document.removeEventListener('touchmove', handleMove);
       document.removeEventListener('touchend', handleEnd);
     };
-  }, [isUnlocked, localOpened, onReveal]);
+  }, [isInteractive, onReveal]);
 
   // Réinitialiser quand le composant change d'état
   useEffect(() => {
@@ -300,7 +306,7 @@ const ScratchReveal: React.FC<ScratchRevealProps> = ({ onReveal, isUnlocked, isO
   return (
     <div className="relative w-full">
       {/* Indice "Grattez pour révéler" uniquement sur la date du jour - en dehors du overflow-hidden */}
-      {isToday && isUnlocked && !localOpened && !isScratching && (
+      {isScratchable && !localOpened && !isScratching && (
         <div className="absolute -top-10 left-0 right-0 z-30 flex items-center justify-center pointer-events-none">
           <span className="bg-white/90 backdrop-blur-md px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-[0.2em] text-blue-600 shadow-lg border-2 border-blue-200/50">
             Scratch
@@ -316,7 +322,7 @@ const ScratchReveal: React.FC<ScratchRevealProps> = ({ onReveal, isUnlocked, isO
         style={isUnlocked ? { background: skyGradient } : {}}
       >
         {/* Indicateur visuel pour les cases ouvrables - brillance subtile */}
-        {isUnlocked && !localOpened && (
+        {isInteractive && (
           <div className="absolute inset-0 z-15 pointer-events-none rounded-[2rem] opacity-30">
             <div className="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-transparent rounded-[2rem] animate-[shimmer_3s_ease-in-out_infinite]" />
           </div>
