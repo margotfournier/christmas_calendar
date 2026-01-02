@@ -1,6 +1,9 @@
 year: 2025
 month: 12
 days:
+  - id: 2
+    title: "Teaser"
+    url: "https://docs.google.com/document/d/19qUAfoIJUPbcXu1YW7J0nCe1cg7Mz0zQhmDieCOJxmc/edit?tab=t.0"
   - id: 5
     title: "Créer son premier Projet thématique"
     url: "https://docs.google.com/document/d/1biQ-ECWnCQYucIwUXgVwd5XInclQ9uTa9kjtJPinWxk/edit?tab=t.0"
