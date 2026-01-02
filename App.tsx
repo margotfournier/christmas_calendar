@@ -17,12 +17,17 @@ const App: React.FC = () => {
   const [targetYear, setTargetYear] = useState<number>(2026);
   const [targetMonth, setTargetMonth] = useState<number>(0);
 
-  const actualToday = new Date();
-  const isCurrentTargetMonth = actualToday.getFullYear() === targetYear && actualToday.getMonth() === targetMonth;
-  const availableDayLimit = isCurrentTargetMonth ? actualToday.getDate() : 0;
-  const isAvailable = (dayNum: number) => {
-    return isCurrentTargetMonth && dayNum <= availableDayLimit;
+  const getMockToday = (): Date | null => {
+    if (typeof window === 'undefined') return null;
+    const query = new URLSearchParams(window.location.search);
+    const override = query.get('mockToday') || query.get('today');
+    if (!override) return null;
+    const parsed = new Date(override);
+    return Number.isNaN(parsed.getTime()) ? null : parsed;
   };
+
+  const actualToday = getMockToday() ?? new Date();
+  const normalizedActualToday = new Date(actualToday.getFullYear(), actualToday.getMonth(), actualToday.getDate());
 
   const handleReveal = (dayNum: number) => {
     setDays(prev => prev.map(d => d.day === dayNum ? { ...d, isUnlocked: true } : d));
@@ -191,9 +196,13 @@ const App: React.FC = () => {
           ))}
 
           {days.map((day) => {
-            const available = isAvailable(day.day);
-            const quietMode = isWeekendOrHoliday(targetYear, targetMonth, day.day);
-            const isToday = isCurrentTargetMonth && day.day === actualToday.getDate();
+            const dayDate = new Date(targetYear, targetMonth, day.day);
+            const available = dayDate.getTime() <= normalizedActualToday.getTime();
+            const isQuietMode = isWeekendOrHoliday(targetYear, targetMonth, day.day);
+            const isToday = dayDate.getTime() === normalizedActualToday.getTime();
+            const isPreviousDay = dayDate.getTime() < normalizedActualToday.getTime();
+            const isOpened = day.isUnlocked || isPreviousDay;
+            const isScratchable = isToday && available && !day.isUnlocked;
             
             // Calculer la semaine pour déterminer si c'est la nuit
             const calendarRow = Math.floor((startOffset + day.day - 1) / 7);
@@ -209,7 +218,7 @@ const App: React.FC = () => {
                   </span>
                 </div>
 
-                {quietMode ? (
+                {isQuietMode ? (
                   <div className="hover:scale-[1.02] transition-transform duration-700">
                     <SleepingAnimal day={day.day} />
                   </div>
@@ -217,7 +226,8 @@ const App: React.FC = () => {
                   <ScratchReveal 
                     onReveal={() => handleReveal(day.day)} 
                     isUnlocked={available}
-                    isOpened={day.isUnlocked}
+                    isOpened={isOpened}
+                    isScratchable={isScratchable}
                     isToday={isToday}
                     day={day.day}
                     startOffset={startOffset}

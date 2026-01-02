@@ -2,6 +2,10 @@
 
 This is a small React + Vite application that renders an interactive “after-calendar” for January 2026. Each day tile can be scratched off to reveal bespoke content (see `ScratchReveal`), weekend cells show a cozy window illustration with a sleeping animal, and snow/firworks effects are handled globally through the `Snowfall` overlay and `WinterIllustration` component so that the scene always feels cinematic.
 
+## Emulating a specific today
+
+While the calendar normally derives “today” from the system clock, you can override it in development by appending a `mockToday` (or legacy `today`) query parameter with any ISO-style date. For example, browse the dev server at `https://hymaia.github.io/ai_calendar_lbc/?mockToday=2026-01-15` and the interface will behave as if January 15 is the current day—only that card stays scratchable while the earlier tiles remain open. This is handy when previewing past or future months without manipulating the system clock.
+
 ## Build & preview
 
 1. Install dependencies (only needed once or when you change `package.json`):
