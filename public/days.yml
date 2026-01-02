@@ -1,12 +1,12 @@
-year: 2025
-month: 12
+year: 2026
+month: 1
 days:
   - id: 2
-    title: "Notion AI is available!"
-    url: "https://www.notion.so/hymaia/Lancement-principes-de-base-et-rassurer-sur-la-s-curit-2d53b2bde8ad80e2a630e9d52e307f30?v=bccdda624c3f425b902c539daa951826&source=copy_link"
+    title: "🎉 Notion AI Launch"
+    url: "https://www.notion.so/tukazza/Notion-AI-Launch-e73babf1fea74c75a872bcacc5a9cf4e"
   - id: 5
     title: "Enterprise search"
-    url: "https://www.notion.so/Enterprise-search-7bae8b91190a4f9a91ea9c6d5883244e?v=da5c7033c4694da4a83b9d39c46ffa0d&source=copy_link"
+    url: "https://www.notion.so/product/ai"
   - id: 6
     title: "Research mode"
     url: "https://www.notion.so/product/ai"
